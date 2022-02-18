@@ -1,5 +1,7 @@
 schema-version: 1.0
 
+type: builder
+
 description: |
   The Gettext package contains utilities for internationalization and localization. These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language.
   Installed programs: autopoint, envsubst, gettext, gettext.sh, gettextize, msgattrib, msgcat, msgcmp, msgcomm, msgconv, msgen, msgexec, msgfilter, msgfmt, msggrep, msginit, msgmerge, msgunfmt, msguniq, ngettext, recode-sr-latin, and xgettext
@@ -35,13 +37,24 @@ description: |
     libtextstyle: Text styling library
     preloadable_libintl: A library, intended to be used by LD_PRELOAD that assists libintl in logging untranslated messages
 
-builder: ./gettext-builder
-
-var:
+in:
   version: 0.21
 
 
+
 provision:
-  - copy:
-      builder: gettext
-      todir: /
+  - url:
+      from: https://ftp.gnu.org/gnu/gettext/gettext-{% version %}.tar.gz
+      todir: "{% xbeeSrc %}"
+
+build:
+  - shell:
+      cmds:
+        - ./configure --prefix=/usr --disable-static --docdir=/usr/share/doc/gettext-{% version %}
+        - make
+#        - make check
+        - make install DESTDIR={% xbeeOut %}
+        - chmod -v 0755 {% xbeeOut %}/usr/lib/preloadable_libintl.so
+      directory: "{% xbeeSrc %}/gettext-{% version %}"
+
+
