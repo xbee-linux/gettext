@@ -37,24 +37,24 @@ description: |
     libtextstyle: Text styling library
     preloadable_libintl: A library, intended to be used by LD_PRELOAD that assists libintl in logging untranslated messages
 
-in:
+var:
   version: 0.21
 
 
 
 provision:
   - url:
-      from: https://ftp.gnu.org/gnu/gettext/gettext-{% version %}.tar.gz
-      todir: "{% xbeeSrc %}"
+      from: https://ftp.gnu.org/gnu/gettext/gettext-{{ .version }}.tar.gz
+      todir: "{{ .xbee.src }}"
 
 build:
   - shell:
       cmds:
-        - ./configure --prefix=/usr --disable-static --docdir=/usr/share/doc/gettext-{% version %}
+        - ./configure --prefix=/usr --disable-static --docdir=/usr/share/doc/gettext-{{ .version }}
         - make
 #        - make check
-        - make install DESTDIR={% xbeeOut %}
-        - chmod -v 0755 {% xbeeOut %}/usr/lib/preloadable_libintl.so
-      directory: "{% xbeeSrc %}/gettext-{% version %}"
+        - make install DESTDIR={{ .xbee.out }}
+        - chmod -v 0755 {{ .xbee.out }}/usr/lib/preloadable_libintl.so
+      directory: "{{ .xbee.src }}/gettext-{{ .version }}"
 
 
