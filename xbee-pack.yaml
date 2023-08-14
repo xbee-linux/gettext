@@ -43,9 +43,7 @@ var:
 
 
 provision:
-  - url:
-      from: https://ftp.gnu.org/gnu/gettext/gettext-{{ .version }}.tar.gz
-      todir: "{{ .xbee.src }}"
+  - url: https://ftp.gnu.org/gnu/gettext/gettext-{{ .version }}.tar.gz
 
 build:
   - shell:
