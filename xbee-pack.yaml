@@ -38,7 +38,8 @@ description: |
     preloadable_libintl: A library, intended to be used by LD_PRELOAD that assists libintl in logging untranslated messages
 
 var:
-  version: 0.21
+  xbee:
+    version: 0.21
 
 
 
