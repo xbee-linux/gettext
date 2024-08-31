@@ -44,16 +44,16 @@ var:
 
 
 provision:
-  - url: https://ftp.gnu.org/gnu/gettext/gettext-{{ .version }}.tar.gz
+  - url: https://ftp.gnu.org/gnu/gettext/gettext-{{ .xbee.version }}.tar.gz
 
 build:
   - shell:
       cmds:
-        - ./configure --prefix=/usr --disable-static --docdir=/usr/share/doc/gettext-{{ .version }}
+        - ./configure --prefix=/usr --disable-static --docdir=/usr/share/doc/gettext-{{ .xbee.version }}
         - make
 #        - make check
         - make install DESTDIR={{ .xbee.out }}
         - chmod -v 0755 {{ .xbee.out }}/usr/lib/preloadable_libintl.so
-      directory: "{{ .xbee.src }}/gettext-{{ .version }}"
+      directory: "{{ .xbee.src }}/gettext-{{ .xbee.version }}"
 
 
