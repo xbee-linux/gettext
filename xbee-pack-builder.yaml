@@ -46,7 +46,7 @@ provision:
 
 build:
   - shell:
-      cmds:
+      cmd:
         - ./configure --prefix=/usr --disable-static --docdir=/usr/share/doc/gettext-{{ .xbee.version }}
         - make
 #        - make check
